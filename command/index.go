@@ -40,6 +40,8 @@ func (i *index) Run(paramMap map[string]string)  {
 	fmt.Println()
 	fmt.Println("The commands are:")
 	fmt.Println(fmt.Sprintf("\t%s\t%s", "start", "build the go file and start it"))
+	fmt.Println(fmt.Sprintf("\t%s\t%s", "build", "build the go file"))
+	fmt.Println(fmt.Sprintf("\t%s\t%s", "start", "kill the go process then build the go file and start it"))
 	os.Exit(0)
 }
 
