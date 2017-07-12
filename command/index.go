@@ -12,6 +12,7 @@ func GetCommand(name string) command {
 	case "start":
 		return new(start)
 	case "restart":
+		return new(restart)
 	case "build":
 		return new(build)
 	default:
