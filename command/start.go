@@ -45,7 +45,7 @@ func (s *start) Run(paramMap map[string]string)  {
 	if string(fileBytes) != "" {
 		err = json.Unmarshal(fileBytes, &projects)
 	}
-	if i, _ := getFromProjects(name, projects); i == -1 {
+	if i, _ := getFromProjects(name, projects); i != -1 {
 		checkErr(errors.New("name has already existed"))
 	}
 	checkErr(err)
