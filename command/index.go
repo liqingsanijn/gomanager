@@ -15,6 +15,8 @@ func GetCommand(name string) command {
 		return new(restart)
 	case "build":
 		return new(build)
+	case "stop":
+		return new(stop)
 	default:
 		return new(index)
 	}

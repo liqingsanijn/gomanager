@@ -11,11 +11,11 @@ import (
 	"bufio"
 )
 
-type restart struct {
+type stop struct {
 
 }
 
-func (s *restart) Help()  {
+func (s *stop) Help()  {
 	fmt.Println("usage: start [arguments]")
 	fmt.Println()
 	fmt.Println("the arguments are:")
@@ -23,7 +23,7 @@ func (s *restart) Help()  {
 	os.Exit(0)
 }
 
-func (s *restart) Run(paramMap map[string]string)  {
+func (s *stop) Run(paramMap map[string]string)  {
 	name := paramMap["-n"]
 	if name == "" {
 		s.Help()
@@ -60,14 +60,8 @@ func (s *restart) Run(paramMap map[string]string)  {
 		err := kill.Run()
 		checkErr(err)
 	}
-	gopath := os.Getenv("GOPATH")
-	bu := exec.Command("/bin/sh", "-c", fmt.Sprintf("go build -o %s/bin/%s %s", gopath, name, p.Path))
-	err = bu.Run()
-	checkErr(err)
-	start := exec.Command("/bin/sh", "-c", fmt.Sprintf("%s >> %s 2>&1 &", name, p.Log))
-	err = start.Run()
-	checkErr(err)
-	p.Restart = p.Restart + 1
+	p.Restart = 0
+	p.State = 0
 	projects[i] = p
 	jsonByte, err := json.Marshal(projects)
 	write, err := os.Create(fileName)
@@ -76,5 +70,5 @@ func (s *restart) Run(paramMap map[string]string)  {
 	w.Write(jsonByte)
 	err = w.Flush()
 	checkErr(err)
-	fmt.Println(fmt.Sprintf("restart %s success", name))
+	fmt.Println(fmt.Sprintf("stop %s success", name))
 }
