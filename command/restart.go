@@ -44,7 +44,7 @@ func (s *restart) Run(paramMap map[string]string)  {
 	if p.Name == "" {
 		checkErr(errors.New("project is not existed"))
 	}
-	cmd := exec.Command("/bin/sh", "-c", fmt.Sprintf( "ps aux | grep %s | grep -v '[grep|restart]' | awk '{print$2}'", name))
+	cmd := exec.Command("/bin/sh", "-c", fmt.Sprintf( "ps aux | grep %s | grep -v -E 'grep|restart|stop|start' | awk '{print$2}'", name))
 	outBytes, err := cmd.Output()
 	checkErr(err)
 	pidStr := string(outBytes)
