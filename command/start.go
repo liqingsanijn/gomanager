@@ -37,7 +37,6 @@ func (s *start) Run(paramMap map[string]string)  {
 	gopath := os.Getenv("GOPATH")
 	fileName := "/tmp/gomanager/projects"
 	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
-	//file, err := os.Create(fileName)
 	checkErr(err)
 	fileBytes, err := ioutil.ReadAll(file)
 	checkErr(err)
@@ -46,7 +45,7 @@ func (s *start) Run(paramMap map[string]string)  {
 		err = json.Unmarshal(fileBytes, &projects)
 	}
 	if i, _ := getFromProjects(name, projects); i != -1 {
-		checkErr(errors.New("name has already existed"))
+		checkErr(errors.New("project name has already existed"))
 	}
 	checkErr(err)
 	cmd := exec.Command("/bin/sh", "-c", fmt.Sprintf("go build -o %s/bin/%s %s", gopath, name, path))

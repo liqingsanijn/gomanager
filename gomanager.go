@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"gomanager/command"
 )
@@ -30,19 +29,15 @@ func main()  {
 func parseArgument(params []string) map[string]string {
 	paramMap := make(map[string]string)
 	if len(params) == 1 {
-		help()
+		command.Help()
 	}
 	paramMap["command"] = params[1]
 	for i := 2; i < len(params); i+=2 {
-		paramMap[params[i]] = params[i + 1]
+		if i == len(params) - 1 {
+			paramMap[params[i]] = ""
+		} else {
+			paramMap[params[i]] = params[i + 1]
+		}
 	}
 	return paramMap
-}
-
-func help()  {
-	fmt.Println("Usage:", "gomanager command [arguments]")
-	fmt.Println()
-	fmt.Println("The commands are:")
-	fmt.Println(fmt.Sprintf("\t%s\t%s", "start", "build the go file and start it"))
-	os.Exit(0)
 }

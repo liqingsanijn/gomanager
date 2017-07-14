@@ -38,13 +38,7 @@ func (i *index) Help()  {
 }
 
 func (i *index) Run(paramMap map[string]string)  {
-	fmt.Println("Usage:", "gomanager command [arguments]")
-	fmt.Println()
-	fmt.Println("The commands are:")
-	fmt.Println(fmt.Sprintf("\t%s\t%s", "start", "build the go file and start it"))
-	fmt.Println(fmt.Sprintf("\t%s\t%s", "build", "build the go file"))
-	fmt.Println(fmt.Sprintf("\t%s\t%s", "start", "kill the go process then build the go file and start it"))
-	os.Exit(0)
+	Help()
 }
 
 func checkErr(err error)  {
@@ -53,4 +47,14 @@ func checkErr(err error)  {
 		fmt.Println("failed")
 		os.Exit(1)
 	}
+}
+
+func Help()  {
+	fmt.Println("Usage:", "gomanager command [arguments]")
+	fmt.Println()
+	fmt.Println("The commands are:")
+	fmt.Println(fmt.Sprintf("\t%s\t%s", "start", "build the go file and start it"))
+	fmt.Println(fmt.Sprintf("\t%s\t%s", "build", "build the go file"))
+	fmt.Println(fmt.Sprintf("\t%s\t%s", "restart", "kill the go process then build the go file and start it"))
+	os.Exit(0)
 }
